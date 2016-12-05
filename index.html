@@ -19,17 +19,16 @@
 
     // Our array of possible computer choices for random letter.
     var randomLetterChoice = ["a", "b", "c", "d", "e", "f", "g", "h", "i" , "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
-	// Send to Console to make sure length is correct.
- 	// console.log(randomLetterChoice.length);
 
  	// Variables for tracking our wins, losses, guesses left, and guesses so far.
     var wins = 0;
     var losses = 0;
     var guessesLeft = 9;
+    var currentGSFarIndexNum = 0;
     var guessesSoFar = []
     var lastGuessCorrect = false;
     var gameStart = false;
-    var randChoice;
+    var holdingValue;
 
     // When the user presses a key, it will start this iteration...
     document.onkeyup = function(event) {
@@ -39,35 +38,40 @@
 
     	// If a Game has just been Won or Lost, Choose a new rand letter.
 	    if (guessesLeft === 9 || lastGuessCorrect === true) {
-			var randChoice = randomLetterChoice[Math.floor(Math.random() *randomLetterChoice.length)];
-			// console.log(randChoice);
-			console.log(randChoice)
+			var randNum = randomLetterChoice[Math.floor(Math.random() *randomLetterChoice.length)];
+            
+            holdingValue = randNum;
+			console.log(holdingValue);
 		}
         else {
-            randChoice = randChoice;
+            randNum = holdingValue;
+            console.log(holdingValue);
         }
-
-
-		
-    	// Determine which key was pressed, make it lowercase, and set it to the userGuesggs variable.
+        
+    	// Determine which key was pressed, make it lowercase, and set it to the userGuess variable.
     	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
     	console.log(userGuess);
 
-    	if (randChoice == userGuess) {
+    	if (randNum === userGuess) {
     		wins = wins + 1;
     		guessesLeft = 9;
     		lastGuessCorrect = true;
     		guessesSoFar = [];
+            currentGSFarIndexNum = 0;
     	}
     	else {
     		lastGuessCorrect = false;
     		guessesLeft = guessesLeft - 1;
+            guessesSoFar = guessesSoFar + "- " + userGuess;
+            currentGSFarIndexNum = currentGSFarIndexNum + 1;
     	}
 
     	// If Guesses Left equals 0, reset is to 9, and add a 1 loss.
     	if (guessesLeft === 0) {
     		losses = losses + 1;
     		guessesLeft = 9;
+            guessesSoFar = [];
+            currentGSFarIndexNum = 0;
     	}
 
     }
@@ -83,7 +87,7 @@
         "<p>Can you handle...</p>" +
         "<p>!~! THE PSYCHIC GAME !~!</p>" +
       	"<p>TRY to... guess what letter I am thinking...</p>" +
-        "<p>Press a alphabet character to play</p>" +
+        "<p>Press an alphabet character to play</p>" +
 		"<p>! Wins ! " + wins + "</p>" +
         "<p>! Losses ! " + losses + "</p>" +
         "<p>! Guesses Left ! " + guessesLeft + "</p>" +
@@ -91,7 +95,6 @@
 
         // Injecting the HTML we just created into our div and updating the game information on our page.
         document.querySelector("#htmlGameCode").innerHTML = html;
-
     }
   
     </script>

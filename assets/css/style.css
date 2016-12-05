@@ -1,5 +1,5 @@
 body {
-	background-color: seashell;
+	background-color: azure;
 }
 
 #subIntroLine {
@@ -16,11 +16,11 @@ body {
 	display: inline-block;
 }
 
-#instructions {
-	background-color: black;
-	color: white;
+p {
+	background-color: lightblue;
+	color: midnightblue;
 	font-size: 1.5em;
-	display: inline-block;
+	display: block;
 }
 
 #gameStatus {
