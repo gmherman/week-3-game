@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>THE PSYCHIC GAME</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+
+    <!-- When we start playing the game, our HTML will be placed into this div. -->
+    <div id="htmlGameCode">
+      <h2 id="subIntroLine">Can you handle...</h2><br>
+      <h1 id="mainTitle">!~! THE PSYCHIC GAME !~!</h1><br>
+      <p id="instructions">TRY to... guess what letter I am thinking...</p>
+      <br>
+    </div>
+
+    <script type="text/javascript">
+
+    // Our array of possible computer choices for random letter.
+    var randomLetterChoice = ["a", "b", "c", "d", "e", "f", "g", "h", "i" , "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+	// Send to Console to make sure length is correct.
+ 	// console.log(randomLetterChoice.length);
+
+ 	// Variables for tracking our wins, losses, guesses left, and guesses so far.
+    var wins = 0;
+    var losses = 0;
+    var guessesLeft = 9;
+    var guessesSoFar = []
+    var lastGuessCorrect = false;
+    var gameStart = false;
+    var randChoice;
+
+    // When the user presses a key, it will start this iteration...
+    document.onkeyup = function(event) {
+
+    // Unless you just loaded the page, update the Guesses Left Counter
+    if (gameStart === true) {
+
+    	// If a Game has just been Won or Lost, Choose a new rand letter.
+	    if (guessesLeft === 9 || lastGuessCorrect === true) {
+			var randChoice = randomLetterChoice[Math.floor(Math.random() *randomLetterChoice.length)];
+			// console.log(randChoice);
+			console.log(randChoice)
+		}
+        else {
+            randChoice = randChoice;
+        }
+
+
+		
+    	// Determine which key was pressed, make it lowercase, and set it to the userGuesggs variable.
+    	var userGuess = String.fromCharCode(event.keyCode).toLowerCase();
+    	console.log(userGuess);
+
+    	if (randChoice == userGuess) {
+    		wins = wins + 1;
+    		guessesLeft = 9;
+    		lastGuessCorrect = true;
+    		guessesSoFar = [];
+    	}
+    	else {
+    		lastGuessCorrect = false;
+    		guessesLeft = guessesLeft - 1;
+    	}
+
+    	// If Guesses Left equals 0, reset is to 9, and add a 1 loss.
+    	if (guessesLeft === 0) {
+    		losses = losses + 1;
+    		guessesLeft = 9;
+    	}
+
+    }
+
+    else {
+    	gameStart = true;
+    	guessesLeft	= 9;
+    }
+
+    // Here we create the HTML that will be injected into our div and displayed on the page.
+
+        var html = 
+        "<p>Can you handle...</p>" +
+        "<p>!~! THE PSYCHIC GAME !~!</p>" +
+      	"<p>TRY to... guess what letter I am thinking...</p>" +
+        "<p>Press a alphabet character to play</p>" +
+		"<p>! Wins ! " + wins + "</p>" +
+        "<p>! Losses ! " + losses + "</p>" +
+        "<p>! Guesses Left ! " + guessesLeft + "</p>" +
+        "<p>! Your Guesses So Far ! " + guessesSoFar + "</p>";
+
+        // Injecting the HTML we just created into our div and updating the game information on our page.
+        document.querySelector("#htmlGameCode").innerHTML = html;
+
+    }
+  
+    </script>
+
+  </body>
+</html>

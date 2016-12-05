@@ -1,0 +1,31 @@
+body {
+	background-color: seashell;
+}
+
+#subIntroLine {
+	background-color: darkblue;
+	color: gold;
+	font-size: 1.5em;
+	display: inline-block;
+}
+
+#mainTitle {
+	background-color: lightgreen;
+	color: purple;
+	font-size: 3em;
+	display: inline-block;
+}
+
+#instructions {
+	background-color: black;
+	color: white;
+	font-size: 1.5em;
+	display: inline-block;
+}
+
+#gameStatus {
+	color: darkblue;
+	font-weight: bold;
+	font-size: 1.4em;
+}
+
